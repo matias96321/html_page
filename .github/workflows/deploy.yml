@@ -1,0 +1,29 @@
+name: Deploy para GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload dos arquivos para GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Fazer deploy
+        uses: actions/deploy-pages@v4
